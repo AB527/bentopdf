@@ -191,7 +191,7 @@ export default defineConfig(({ mode }) => ({
   },
   optimizeDeps: {
     include: ['pdfkit', 'blob-stream'],
-    exclude: ['coherentpdf'],
+    exclude: ['coherentpdf', '@bentopdf/pymupdf-wasm'],
   },
   server: {
     host: true,

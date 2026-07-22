@@ -104,7 +104,12 @@ function injectToolBreadcrumb(document, lang, toolName, toolUrl) {
   if (!h1) return;
   if (document.querySelector(`[${BREADCRUMB_MARKER}]`)) return;
 
+  // Absolute canonical URL — used only for the JSON-LD structured data (SEO).
   const homeUrl = buildUrl(lang === 'en' ? '' : lang, '');
+  // Local, deployment-relative URL for the visible link so self-hosted
+  // instances keep users on their own site instead of the public bentopdf.com.
+  const localHomeHref =
+    lang === 'en' ? `${BASE_PATH}/` : `${BASE_PATH}/${lang}/`;
 
   const nav = document.createElement('nav');
   nav.setAttribute('aria-label', 'Breadcrumb');
@@ -112,7 +117,7 @@ function injectToolBreadcrumb(document, lang, toolName, toolUrl) {
   nav.className = 'text-sm text-gray-400 mb-4';
 
   const homeLink = document.createElement('a');
-  homeLink.href = homeUrl;
+  homeLink.href = localHomeHref;
   homeLink.className = 'hover:text-indigo-300';
   homeLink.textContent = 'BentoPDF';
 
